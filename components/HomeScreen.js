@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, ScrollView, ToastAndroid } from 'react-native';
+import { View, Text, Image, Pressable, ScrollView, ToastAndroid, StatusBar } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import data from "../db.json"
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -133,6 +133,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={{ backgroundColor: "white" }}>
+            <StatusBar />
             {/* Category */}
             <View style={{
                 backgroundColor: "#E0FFFF",
