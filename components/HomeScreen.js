@@ -107,17 +107,27 @@ const HomeScreen = ({ navigation }) => {
         </View>
     );
 
-    const handleGetBrand = (data) => {
-        const brandNameSet = new Set(data.map(watch => watch.brandName));
-        // Convert the Set back into an array of objects
-        const uniqueBrandNames = [...brandNameSet].map(brandName => ({ brandName: brandName, isChoosed: false }));
-        return uniqueBrandNames;
+    const handleGetBrand = async (data) => {
+        const value = await AsyncStorage.getItem('brandsChoose');
+        if (value !== null) {
+            // value previously stored
+            return JSON.parse(value);
+        } else {
+            const brandNameSet = new Set(data.map(watch => watch.brandName));
+            // Convert the Set back into an array of objects
+            const uniqueBrandNames = [...brandNameSet].map(brandName => ({ brandName: brandName, isChoosed: false }));
+            return uniqueBrandNames;
+        }
     }
 
     useFocusEffect(
         useCallback(() => {
             getData();
-            setBrands(handleGetBrand(data));
+            const handleBrand = async () => {
+                const arr = await handleGetBrand(data);
+                setBrands(arr);
+            }
+            handleBrand();
         }, [isClicked])
     )
 
@@ -150,7 +160,6 @@ const HomeScreen = ({ navigation }) => {
                                     index={index}
                                     brand={brand.brandName}
                                     setBrands={setBrands}
-                                    setWatches={setWatches}
                                     isChoosed={brand.isChoosed}
                                 />
                             </React.Fragment>
@@ -160,11 +169,33 @@ const HomeScreen = ({ navigation }) => {
             </View>
             {/* Array of watches */}
             <View style={{ flex: 1, padding: 20 }}>
-                {arrWatch.map((item, index) => (
-                    <React.Fragment key={index}>
-                        {renderItem({ item })}
-                    </React.Fragment>
-                ))}
+                {
+                    arrWatch.map((item, index) => {
+                        let arrChoosed = []
+                        for (let i = 0; i < arrBrands.length; i++) {
+                            if (arrBrands[i].isChoosed) {
+                                arrChoosed.push(arrBrands[i])
+                            }
+                        }
+                        if (arrChoosed.length == 0) {
+                            return (
+                                <React.Fragment key={index}>
+                                    {renderItem({ item })}
+                                </React.Fragment>
+                            )
+                        } else {
+                            for (let i = 0; i < arrChoosed.length; i++) {
+                                if (arrChoosed[i].brandName === item.brandName) {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            {renderItem({ item })}
+                                        </React.Fragment>
+                                    )
+                                }
+                            }
+                        }
+                    })
+                }
             </View>
         </ScrollView>
     )
