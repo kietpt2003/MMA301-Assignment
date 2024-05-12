@@ -133,7 +133,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={{ backgroundColor: "white" }}>
-            <StatusBar />
+            <StatusBar hidden={true} />
             {/* Category */}
             <View style={{
                 backgroundColor: "#E0FFFF",
