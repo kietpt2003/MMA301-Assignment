@@ -1,6 +1,6 @@
 {
   "cli": {
-    "version": ">= 7.8.2",
+    "version": ">= 9.0.3",
     "appVersionSource": "remote"
   },
   "build": {
@@ -9,8 +9,8 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal",
-      "autoIncrement": true
+      "autoIncrement": true,
+      "distribution": "internal"
     },
     "production": {
       "autoIncrement": true

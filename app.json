@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "WatchNews",
-    "slug": "ass3",
+    "slug": "WatchNews",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,14 +22,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kietpt2003.ass3"
+      "package": "com.kietpt2003.WatchNews"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "4cc3ee66-0325-4cfc-8ce7-0fdc366f77cd"
+        "projectId": "306c8950-d135-4dda-9d86-c39bff37e4d8"
       }
     }
   }
